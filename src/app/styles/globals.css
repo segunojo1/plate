@@ -1,13 +1,810 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* @layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+} */
+
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+/* Fallback for other browsers */
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+}
+
+.signup_container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  background-color: rgb(255, 255, 255, 0.21);
+  overflow: visible;
+  backdrop-filter: blur(5px);
+  border-radius: 18.38px;
+}
+
+.signup_img,
+.dash_img {
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/auth_bg.png");
+  background-size: contain;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.signup_content {
+  position: relative;
+  z-index: 1;
+  color: black;
+}
+.imgg_container {
+  position: relative;
+  width: 83%;
+  margin: auto;
+}
+.dash_img {
+  background-image: url("/assets/dash_bg.png");
+}
+.font-satoshi {
+  font-family: "Satoshi", sans-serif;
+}
+input[type="radio"]:focus {
+  outline: none; /* Remove default focus outline */
+  position: relative;
+}
+input[type="radio"]::before{
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  transform-origin: bottom left;
+}
+.scroll-button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+.first-text, .second-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  transition: transform 0.5s ease;
+}
+
+.second-text {
+  transform: translate(150%, -50%);
+}
+
+.scroll-button:hover .first-text {
+  transform: translate(-250%, -50%);
+}
+
+.scroll-button:hover .second-text {
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  position: relative;
+  height: 200%;
+  transition: transform 1s ease-in-out;
+}
+
+.content-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.scrolled-up {
+  transform: translateY(-115vh);
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+}
+.loader::before,
+.loader::after {    
+  content:"";
+  grid-area: 1/1;
+  --c:no-repeat radial-gradient(farthest-side,#25b09b 92%,#0000);
+  background: 
+    var(--c) 50%  0, 
+    var(--c) 50%  100%, 
+    var(--c) 100% 50%, 
+    var(--c) 0    50%;
+  background-size: 12px 12px;
+  animation: l12 1s infinite;
+}
+.loader::before {
+  margin: 4px;
+  filter: hue-rotate(45deg);
+  background-size: 8px 8px;
+  animation-timing-function: linear
+}
+
+@keyframes l12 { 
+  100%{transform: rotate(.5turn)}
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader2 {
+  width: 60px;
+  left: 0;
+  aspect-ratio: 4;
+  --_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
+  background: 
+    var(--_g) 0%   50%,
+    var(--_g) 50%  50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 100%;
+  animation: l7 1s infinite linear;
+}
+@keyframes l7 {
+    33%{background-size:calc(100%/3) 0%  ,calc(100%/3) 100%,calc(100%/3) 100%}
+    50%{background-size:calc(100%/3) 100%,calc(100%/3) 0%  ,calc(100%/3) 100%}
+    66%{background-size:calc(100%/3) 100%,calc(100%/3) 100%,calc(100%/3) 0%  }
+}
+
+/* Custom focus style for radio button */
+input[type="radio"]:active::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid green;
+  border-radius: 50%;
+  /* width: fit-content; */
+}
+input[type="checkbox"], input[type="radio"] {
+  box-shadow: inset 0 2px 2px -1px rgba(74, 74, 104, 0.1);
+  display: grid;
+  
+}
+input[type="checkbox"]::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  transform-origin: bottom left;
+  background-image: url("/checked.svg");
+  background-position: center;
+  
+}
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+  accent-color: green;
+}
+
+/* ProgressBar.css */
+/* ProgressLines.css */
+.progress-lines-container2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 55px;
+ 
+}
+
+.progress-line2 {
+  margin: 0 3px; /* Gap between the lines */
+  transition: flex 0.4s ease; /* Smooth transition */
+  
+}
+
+.progress-line2:first-child {
+  margin-left: 0; /* No left margin for the first line */
+}
+
+.progress-line2:last-child {
+  margin-right: 0; /* No right margin for the last line */
+}
+
+.googleTranslateWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#google_translate_element {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  height: 40px;
+  max-width: fit-content !important;
+}
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+.goog-te-gadget {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+  color: #333 !important;
+  width: fit-content !important;
+}
+
+.goog-te-gadget .goog-te-combo option {
+  cursor: pointer !important;
+  padding: 2rem !important;
+  font-size: 20px !important;
+  color: #333 !important;
+}
+
+.goog-te-gadget-icon {
+  display: none !important;
+}
+#google_translate_element{
+  padding: 0 !important;
+  max-height: 45px;
+  overflow: hidden;
+}
+.goog-te-combo {
+  color: #333 !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  padding: .5rem !important;
+  width: fit-content !important;
+  background-color: #F5F6F7;
+  font-family: 'Satoshi' !important;
+  margin: 0 !important;
+ margin-top: 2px !important;
+}
+@media screen and (max-width: 768px) {
+  .goog-te-combo{
+    width: 100px !important;
+  }
+}
+
+.VIpgJd-ZVi9od-l4eHX-hSRGPd, .VIpgJd-ZVi9od-ORHb-OEVmcd {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+#\:0\.targetLanguage {
+  background-color: #E8E4FB;
+}
+.goog-te-combo{
+  background-color: #E8E4FB;
+}
+}
+
+
+/* ProgressLines.css */
+.progress-lines-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  height: 300px; /* Adjust this height as needed */
+  /* margin: 20px 0; */
+}
+
+.progress-line {
+  width: 8px; /* Width of each line */ /* Default height of each line */
+  margin: 5px 0; /* Gap between the lines */
+  transition: height 0.4s ease; /* Smooth transition */
+  border-radius: 10px;
+}
+
+.progress-line:first-child {
+  margin-top: 0; /* No top margin for the first line */
+}
+
+.progress-line:last-child {
+  margin-bottom: 0; /* No bottom margin for the last line */
+}
+
+
+
+/* .goals {
+  border-radius: 20px;
+  padding: 3rem;
+  width: fit-content;
+} */
+.nav {
+  left: 0;
+}
+@media screen and (min-width: 760px) {
+  .nav {
+  }
+}
+
+.file-input-wrapper {
+  position: relative;
+  width: 200px;
+  height: 40px;
+  overflow: hidden;
+  background-color: transparent;
+  color: #8c77ec;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.file-input-wrapper input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-input-label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 40px;
+  text-align: center;
+}
+
+.dashboardhead {
+  background-image: url("/assets/noisetexture.png"), url("/assets/Gradient.png");
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+.mealreco {
+  background-image: url("/assets/noisetexture.png");
+  background-size: contain;
+}
+
+
+
+
+
+
+/*====== CALENDER ======*/
+.react-calendar { 
+  width: 273px;
+  padding: 14px;
+  max-width: 100%;
+  color: #0A0B0A;
+  border-radius: 20px;
+  background: #EDFAE7;
+  font-family: "Satoshi";
+  font-weight: 700;
+  font-size: 8.35px;
+  line-height: 120%;
+ }
+ .react-calendar__navigation button {
+  min-width: 22px;
+  
+ }
+ /* .react-calendar__navigation button:enabled:hover,
+ .react-calendar__navigation button:enabled:focus {
+  background-color: #f8f8fa;
+ } */
+ /* .react-calendar__navigation button[disabled] {
+  background-color: #f0f0f0;
+ } */
+ abbr[title] {
+  text-decoration: none;
+ }
+ /* .react-calendar__month-view__days__day--weekend {
+  color: #d10000;
+ } */
+ .react-calendar__tile:enabled:hover,
+ .react-calendar__tile:enabled:focus {
+  background: rgb(173, 237, 173);
+  color: #000;
+ }
+ .react-calendar__tile--now {
+  background: #6f48eb33;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #6f48eb;
+ }
+ .react-calendar__tile--now:enabled:hover,
+ .react-calendar__tile--now:enabled:focus {
+  background: #6f48eb33;
+  border-radius: 100%;
+  font-weight: bold;
+  color: #6f48eb;
+ }
+ /* .react-calendar__tile--hasActive:enabled:hover,
+ .react-calendar__tile--hasActive:enabled:focus {
+  background: #f8f8fa;
+ } */
+ .react-calendar__tile--active:enabled:hover,
+ .react-calendar__tile--active:enabled:focus {
+  background: hsl(0, 0%, 22%);
+  color: #FAFAFA;
+ }
+ .react-calendar__tile--range {
+  background: #f8f8fa;
+  color: #6f48eb;
+  border-radius: 0;
+ }
+ .react-calendar__tile--rangeStart {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  background: #6f48eb;
+  color: white;
+ }
+ .react-calendar__tile--rangeEnd {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background: #6f48eb;
+  color: white;
+ }
+ .react-calendar__navigation {
+  display: flex;
+  height: 22px;
+  margin-bottom: 2em;
+}
+
+
+
+.react-calendar--doubleView {
+  width: 700px;
+}
+
+.react-calendar--doubleView .react-calendar__viewContainer {
+  display: flex;
+  margin: -0.5em;
+}
+
+.react-calendar--doubleView .react-calendar__viewContainer > * {
+  width: 50%;
+  margin: 0.5em;
+}
+
+.react-calendar,
+.react-calendar *,
+.react-calendar *:before,
+.react-calendar *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.react-calendar button {
+  margin: 0;
+  border: 0;
+  outline: none;
+}
+
+.react-calendar button:enabled:hover {
+  cursor: pointer;
+}
+
+
+
+
+.react-calendar__navigaation button:disabled {
+  background-color: #f0f0f0;
+}
+
+
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font: inherit;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
+}
+
+.react-calendar__month-view__weekNumbers .react-calendar__tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+/* .react-calendar__month-view__days__day--weekend {
+  color: #d10000;
+} */
+
+.react-calendar__month-view__days__day--neighboringMonth,
+.react-calendar__decade-view__years__year--neighboringDecade,
+.react-calendar__century-view__decades__decade--neighboringCentury {
+  color: black;
+  opacity: 30%;
+}
+
+/* .react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+  padding: 2em 0.5em;
+} */
+
+.react-calendar__tile {
+  width: fit-content;
+  padding: 11px 0px;
+  background: none;
+  text-align: center;
+  line-height: 16px;
+  font: inherit;
+  font-size: 8px;
+  border-radius: 100%;
+}
+
+.react-calendar__tile:disabled {
+  background-color: #f0f0f0;
+  color: #ababab;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth:disabled,
+.react-calendar__decade-view__years__year--neighboringDecade:disabled,
+.react-calendar__century-view__decades__decade--neighboringCentury:disabled {
+  color: #cdcdcd;
+}
+
+.react-calendar__tile--hasActive {
+  background: #76baff;
+}
+
+.react-calendar__tile--active {
+  background: #393939;
+  color: #FAFAFA;
+}
+
+
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background-color: #e6e6e6;
+}
+
+.react-calendar__navigation__next-button,
+.react-calendar__navigation__prev-button{
+  background-color: #393939;
+  /* padding: 8px; */
+  border-radius: 100%;
+  color: white;
+  width: 22px;
+}
+
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #0C2503;
+  border-radius: 5px;
+  padding: 2px; /* Adds padding to the track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #FFC60C;
+  border-radius: 5px;
+  margin: 5px; /* Adds margin to separate the thumb from the track edges */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #FFC60C;
+}
+
+@media screen and (max-width: 768px) {
+  
+  .daily-tea{
+    min-width: 100%
+  }
+}
+
+.swiper-pagination-bullet {
+  background-color: #D2D6DB !important; /* Change to your desired active color */
+}
+.swiper-pagination-bullet-active {
+  background-color: #8C77EC !important; /* Change to your desired active color */
+  width: 31px !important;
+  border-radius: 10px !important;
+  transition: 1s width;
+}
+.sideitem::after{
+  content: '';
+  position: absolute;
+  right: -22px;
+  width: 4px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  height: 100%;
+  background-color: #0c2503;
+}
+.hero{
+  background-image:  url('/herobg.svg');
+}
+.servup::after{
+  content: '';
+  display: block;
+  width: 100%;
+  height: 7px;
+  background-color: #FFC400;
+}
+@media screen and (max-width: 768px) {
+  .servup::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #FFC400;
+  }
+}
+
+.scribble-animation {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: -1;
+  
+}
+
+.path-animation {
+  animation: draw 2s ease-in-out forwards;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 300;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+#scribble {
+  
+}
+
+.swiper-container {
+  max-width: 1000px;
+  height: 600px;
+  position: relative;
+}
+
+.feature {
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  text-align: start;
+  border-radius: 36px;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 0 20px;
+}
+
+.pagination-item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  width: fit-content;
+}
+
+.progress-bar {
+  width: 0;
+  height: 4px;
+  background-color: #735AF4;
+  transition: width 5s linear;
+}
+
+.pagination-item p {
+  margin-top: 5px;
+}
+
